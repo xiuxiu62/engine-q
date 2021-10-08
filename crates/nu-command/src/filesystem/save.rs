@@ -30,8 +30,8 @@ impl Command for Save {
 
     fn run(
         &self,
-        context: &EvaluationContext,
-        call: &Call,
+        _context: &EvaluationContext,
+        _call: &Call,
         _input: Value,
     ) -> Result<Value, ShellError> {
         unimplemented!();

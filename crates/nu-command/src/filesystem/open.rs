@@ -44,8 +44,8 @@ documentation link at https://docs.rs/encoding_rs/0.8.28/encoding_rs/#statics"#
 
     fn run(
         &self,
-        context: &EvaluationContext,
-        call: &Call,
+        _context: &EvaluationContext,
+        _call: &Call,
         _input: Value,
     ) -> Result<Value, ShellError> {
         unimplemented!();
