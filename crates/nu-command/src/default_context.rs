@@ -13,46 +13,54 @@ pub fn create_default_context() -> Rc<RefCell<EngineState>> {
         let engine_state = engine_state.borrow();
         let mut working_set = StateWorkingSet::new(&*engine_state);
 
-        working_set.add_decl(Box::new(Alias));
-        working_set.add_decl(Box::new(Benchmark));
-        working_set.add_decl(Box::new(BuildString));
-        working_set.add_decl(Box::new(Cd));
-        working_set.add_decl(Box::new(Cp));
-        working_set.add_decl(Box::new(Def));
-        working_set.add_decl(Box::new(Do));
-        working_set.add_decl(Box::new(Each));
-        working_set.add_decl(Box::new(ExportDef));
-        working_set.add_decl(Box::new(External));
-        working_set.add_decl(Box::new(For));
-        working_set.add_decl(Box::new(From));
-        working_set.add_decl(Box::new(FromJson));
-        working_set.add_decl(Box::new(Get));
-        working_set.add_decl(Box::new(Help));
-        working_set.add_decl(Box::new(Hide));
-        working_set.add_decl(Box::new(If));
-        working_set.add_decl(Box::new(Length));
-        working_set.add_decl(Box::new(Let));
-        working_set.add_decl(Box::new(LetEnv));
-        working_set.add_decl(Box::new(Lines));
-        working_set.add_decl(Box::new(Ls));
-        working_set.add_decl(Box::new(Mkdir));
-        working_set.add_decl(Box::new(Module));
-        working_set.add_decl(Box::new(Mv));
-        working_set.add_decl(Box::new(Ps));
-        working_set.add_decl(Box::new(Select));
-        working_set.add_decl(Box::new(Sys));
-        working_set.add_decl(Box::new(Table));
-        working_set.add_decl(Box::new(Touch));
-        working_set.add_decl(Box::new(Use));
-        working_set.add_decl(Box::new(Where));
-        working_set.add_decl(Box::new(Wrap));
+        macro_rules! bind_command {
+            ($command:expr) => {
+                working_set.add_decl(Box::new($command));
+            };
+        }
+
+        bind_command!(Alias);
+        bind_command!(Benchmark);
+        bind_command!(BuildString);
+        bind_command!(Cd);
+        bind_command!(Cp);
+        bind_command!(Def);
+        bind_command!(Do);
+        bind_command!(Each);
+        bind_command!(ExportDef);
+        bind_command!(External);
+        bind_command!(For);
+        bind_command!(From);
+        bind_command!(FromJson);
+        bind_command!(Get);
+        bind_command!(Help);
+        bind_command!(Hide);
+        bind_command!(If);
+        bind_command!(Length);
+        bind_command!(Let);
+        bind_command!(LetEnv);
+        bind_command!(Lines);
+        bind_command!(Ls);
+        bind_command!(Mkdir);
+        bind_command!(Module);
+        bind_command!(Mv);
+        bind_command!(Open);
+        bind_command!(Ps);
+        bind_command!(Rm);
+        bind_command!(Select);
+        bind_command!(Sys);
+        bind_command!(Table);
+        bind_command!(Touch);
+        bind_command!(Use);
+        bind_command!(Where);
+        bind_command!(Wrap);
 
         // This is a WIP proof of concept
-        working_set.add_decl(Box::new(ListGitBranches));
-        working_set.add_decl(Box::new(Git));
-        working_set.add_decl(Box::new(GitCheckout));
+        bind_command!(ListGitBranches);
+        bind_command!(Git);
+        bind_command!(GitCheckout);
 
-        working_set.add_decl(Box::new(Source));
+        bind_command!(Source);
 
         let sig = Signature::build("exit");
         working_set.add_decl(sig.predeclare());
