@@ -17,7 +17,7 @@ impl Command for Cp {
     }
 
     fn usage(&self) -> &str {
-        "Copy files."
+        "Copy file(s)."
     }
 
     fn signature(&self) -> Signature {
